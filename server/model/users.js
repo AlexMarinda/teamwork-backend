@@ -7,7 +7,7 @@ const users = [
       password: '$2b$10$BK48vfkI5ExgTiHbWv1U5etSPV8hnqFz3siZrUuQcB0ytDmxWrKce',
       gender: 'male',
       jobRole :'developer',
-      department :'IT',
+      department :'it',
       address: 'kicukiro',
     },
     {
@@ -18,7 +18,7 @@ const users = [
       password: '$2b$10$BK48vfkI5ExgTiHbWv1U5etSPV8hnqFz3siZrUuQcB0ytDmxWrKce',
       gender: 'male',
       jobRole :'developer',
-      department :'IT',
+      department :'it',
       address: 'kicukiro',
     },
     {
@@ -29,7 +29,7 @@ const users = [
       password: '$2b$10$BK48vfkI5ExgTiHbWv1U5etSPV8hnqFz3siZrUuQcB0ytDmxWrKce',
       gender: 'male',
       jobRole :'developer',
-      department :'IT',
+      department :'it',
       address: 'kicukiro',
     }
   ];
