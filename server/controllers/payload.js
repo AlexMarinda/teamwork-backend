@@ -1,6 +1,6 @@
 // Pay load
 const payLoad = (
-    id,
+  user_id,
     firstName,
     lastName,
     email,
@@ -11,7 +11,7 @@ const payLoad = (
     address,
     
   ) => ({
-    id,
+    user_id,
     firstName,
     lastName,
     email,

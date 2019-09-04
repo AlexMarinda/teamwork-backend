@@ -1,6 +1,6 @@
 const users = [
     {
-      id: 1,
+      user_id: 1,
       email: 'malalex44@gmail.com',
       first_name: 'alex',
       last_name: 'marinda',
@@ -9,9 +9,10 @@ const users = [
       jobRole :'developer',
       department :'it',
       address: 'kicukiro',
+      is_admin: false
     },
     {
-      id: 2,
+      user_id: 2,
       email: 'marindaalex44@gmail.com',
       first_name: 'teller',
       last_name: 'marinda',
@@ -20,9 +21,10 @@ const users = [
       jobRole :'developer',
       department :'it',
       address: 'kicukiro',
+      is_admin: false
     },
     {
-      id: 3,
+      user_id: 3,
       email: 'alex@fdibiz@gmail.com',
       first_name: 'marinda',
       last_name: 'alex',
@@ -31,6 +33,7 @@ const users = [
       jobRole :'developer',
       department :'it',
       address: 'kicukiro',
+      is_admin: true
     }
   ];
   

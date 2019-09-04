@@ -71,7 +71,7 @@ const [user1] = users;
           res.body.should.have.property('data').have.property('token');
           done();
         });
-    }).timeout(5000);
+    })
 
     it('it should return 401  when user fills bad inputs', done => {
       chai
@@ -88,6 +88,22 @@ const [user1] = users;
           done();
         });
     });
+  });
+
+  describe('JWT', () => {
+    it('it should return 400 if missing jwt token on authenticated route', done => {
+      chai
+        .request(app)
+        .post('/api/v1/article/')
+        .field('title', 'how can make teamwork')
+        .field('article', 'fgfhgf rtryrt tryrty')
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.have.property('error').eql('Invalid token');
+          done();
+        });
+    });
+
   });
 
 

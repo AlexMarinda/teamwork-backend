@@ -18,6 +18,7 @@ class UserController {
     req.body.jobRole,
     req.body.departmen,
     req.body.address,
+    false
 
     );
 
@@ -49,7 +50,7 @@ static  login(req, res) {
   
       if((users[i].email===email) && (checkPassword(users[i].password,password))){
         const pld= payLoad(           
-         users[i].id,
+         users[i].user_id,
          users[i].first_name,
          users[i].last_name,
          users[i].email,
@@ -57,6 +58,7 @@ static  login(req, res) {
          users[i].jobRole,
          users[i].department,
          users[i].address,
+         false
 
           ) ;
           const token = generateToken(pld);

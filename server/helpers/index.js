@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-//import trips  from '../model/trip';
-//import users from '../model/users';
+import comments from '../model/comment';
+
 
 
 // Generate Token
@@ -19,12 +19,12 @@ const verifyToken = async (req, res, next) => {
   
  
   try {
-    // const token = req.headers.authorization.split(' ')[1] || req.body.token;
-     const token = req.headers.authorization;
+     const token = req.headers.authorization.split(' ')[1] || req.body.token;
+     //const token = req.headers.authorization;
   
-      if (!token || token === '') return res.status(403).send({ status: 401,error: 'Unauthorized access' });
+      if (!token || token === '') return res.status(403).send({ status: 403,message: 'Unauthorized access' });
 
-      jwt.verify(header, 'THIS IS MY SECRETE', { expiresIn: '7d' });
+      jwt.verify(token, 'THIS IS MY SECRETE', { expiresIn: '7d' });
       next();
     //const decodedToken = await JWT.verify(token, process.env.JWT_SECRET,{ expiresIn: '24h' });
     
@@ -50,6 +50,11 @@ const verifyToken = async (req, res, next) => {
    return bcrypt.compareSync(password, hash)
    };
 
+   const findCommentByArticleId = (cquery) =>{
+     const comment= comments.filter(c => c.article_id === cquery);
+     return comment;
+   }
+
    export { 
-    verifyToken, generateToken,encryptPass, checkPassword
+    verifyToken, generateToken,encryptPass, checkPassword,findCommentByArticleId
   };
