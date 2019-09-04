@@ -11,7 +11,7 @@ const comments = [
     },
     {
         comment_id: 2,
-        comment:'fhghfghfhg fggff ',
+        comment:'fhghfghfhg fggf ',
         createdOn:'2019-08-07T17:39:17+02:00',
         article_id: 2,
         user_id:2,
