@@ -53,6 +53,28 @@ const [user1] = users;
           done();
         });
     });
+
+      /*it('it should return 400 ', done => {
+
+    chai
+      .request(app)
+      .post('/api/v1/article')
+      .set('Authorization', `Bearer ${utils.getUserToken(1)}`)
+      .send({
+            email: 'marindaalex44@gmail.com',
+            first_name: 'teller',
+            last_name: 'marinda',
+            password: '123',
+            gender: 'male',
+            jobRole :'developer',
+            department :'it',
+            
+        })
+      .end((err, res) => {
+        res.should.have.status(400);
+      });
+    done();
+  })*/
   });
   describe('SignIn', () => {
     it('it should sign in user if correct credentials provided', done => {
@@ -88,10 +110,27 @@ const [user1] = users;
           done();
         });
     });
+
+          /*it('it should return 400 ', done => {
+
+    chai
+      .request(app)
+      .post('/api/v1/article')
+      .set('Authorization', `Bearer ${utils.getUserToken(1)}`)
+      .send({
+            email: user1.email,
+
+            
+        })
+      .end((err, res) => {
+        res.should.have.status(400);
+      });
+    done();
+  })*/
   });
 
   describe('JWT', () => {
-    it('it should return 400 if missing jwt token on authenticated route', done => {
+    it('it should return 400 ', done => {
       chai
         .request(app)
         .post('/api/v1/article/')
@@ -99,11 +138,26 @@ const [user1] = users;
         .field('article', 'fgfhgf rtryrt tryrty')
         .end((err, res) => {
           res.should.have.status(400);
-          res.body.should.have.property('error').eql('Invalid token');
+          res.body.should.have.property('message').eql('Invalid token');
+          done();
+        });
+    });
+
+    it('it should return 403 if invalid token', done => {
+      chai
+        .request(app)
+        .post('/api/v1/article/')
+        .set('Authorization', `Bearer gfhgbghghbghrhh.etretretre.retrtre`)
+        .field('title', 'how can make teamwork')
+        .field('article', 'fgfhgf rtryrt tryrty')
+        .end((err, res) => {
+          res.should.have.status(403);
+          res.body.should.have.property('message').eql('Unauthorized access');
           done();
         });
     });
 
   });
+  
 
 

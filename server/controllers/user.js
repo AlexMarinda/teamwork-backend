@@ -16,7 +16,7 @@ class UserController {
     encryptPass(req.body.password),
     req.body.gender,
     req.body.jobRole,
-    req.body.departmen,
+    req.body.department,
     req.body.address,
     false
 

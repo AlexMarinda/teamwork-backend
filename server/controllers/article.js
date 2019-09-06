@@ -2,7 +2,7 @@ import articles  from '../model/article';
 import comments from '../model/comment';
 import moment from 'moment';
 import jwt from 'jsonwebtoken';
-import {findCommentByArticleId} from '../helpers';
+
 
 class Article {
     
@@ -11,7 +11,7 @@ class Article {
 static  createArticle(req, res) {
 const getUser = jwt.decode(req.headers.authorization.split(' ')[1]);
 const newArticle = {
-id:articles.length + 1,
+article_id:articles.length + 1,
 title:req.body.title,
 article:req.body.article,
 createdOn:moment().format(),
@@ -47,7 +47,7 @@ static  deleteArticle (req, res) {
       }
      } 
      else {
-          return res.status(400).send({ status: 404,  'message':'article not found!'});
+          return res.status(404).send({ status: 404,  'message':'article not found!'});
      }
      }
 
@@ -71,7 +71,7 @@ static  deleteArticle (req, res) {
           }
          } 
          else {
-              return res.status(400).send({ status: 404,  'message':'article not found!'});
+              return res.status(404).send({ status: 404,  'message':'article not found!'});
          }
          }
 
@@ -94,7 +94,7 @@ static  deleteArticle (req, res) {
 
 
   
-              return res.status(200).send({ status: 200, 'message': 'article successfully edited', data: {
+              return res.status(200).send({ status: 200, 'message': 'success', data: {
                 title:findArticle.title,
                 article:findArticle.article,
                 createdOn:findArticle.createdOn,
@@ -112,6 +112,61 @@ static  deleteArticle (req, res) {
           
       
       }
+
+
+      static  getAllArticle(req, res) {
+        const findArticle =   articles.filter(t => t.status === "share");
+          
+        if(findArticle){
+          //findArticle.sort();
+          findArticle.reverse();
+          
+
+            return res.status(200).send({ status: 200, 'message': 'success', data: 
+            findArticle});
+              
+            }
+            return res.status(404).send({ status: 404,  'message':'article not found!'});
+        
+    
+    }
+
+
+
+
+
+      static  comment (req, res) {
+        const getUser = jwt.decode(req.headers.authorization.split(' ')[1]);
+          const findArticle =   articles.find(t => t.article_id === parseInt(req.params.article_id));
+          if(findArticle){
+             
+             if(findArticle.status === 'share'){
+              const newComment = {
+                comment_id:comments.length + 1,
+                createdOn:moment().format(),
+                article_id:findArticle.article_id,
+                user_id: getUser.user_id,
+                comment:req.body.comment
+                
+                };
+  
+              comments.push(newComment);
+      
+        
+              return res.status(201).send({ status: 201, 'message': 'relevant-success-message', data: {
+                createdOn:newComment.createdOn,
+                title:findArticle.title,
+                article:findArticle.article,
+              comment:newComment.comment}});
+            }
+            else{
+              return res.status(400).send({ status: 400, 'message':'this article is not published now'});
+            }
+           } 
+           else {
+                return res.status(404).send({ status: 404,  'message':'article not found!'});
+           }
+           }
 
 
 

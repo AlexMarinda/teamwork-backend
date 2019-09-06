@@ -22,7 +22,7 @@ const verifyToken = async (req, res, next) => {
      const token = req.headers.authorization.split(' ')[1] || req.body.token;
      //const token = req.headers.authorization;
   
-      if (!token || token === '') return res.status(403).send({ status: 403,message: 'Unauthorized access' });
+      if (!token && token === '') return res.status(403).send({ status: 403,message: 'Unauthorized access' });
 
       jwt.verify(token, 'THIS IS MY SECRETE', { expiresIn: '7d' });
       next();
@@ -32,7 +32,7 @@ const verifyToken = async (req, res, next) => {
    // return next();
     
   } catch (error) {
-    return res.status(400).send({ status: 400, error:'Invalid token' });
+    return res.status(400).send({ status: 400, message:'Invalid token' });
   }
 
   return true;
@@ -50,11 +50,7 @@ const verifyToken = async (req, res, next) => {
    return bcrypt.compareSync(password, hash)
    };
 
-   const findCommentByArticleId = (cquery) =>{
-     const comment= comments.filter(c => c.article_id === cquery);
-     return comment;
-   }
 
    export { 
-    verifyToken, generateToken,encryptPass, checkPassword,findCommentByArticleId
+    verifyToken, generateToken,encryptPass, checkPassword
   };
